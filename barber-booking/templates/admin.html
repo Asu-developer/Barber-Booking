@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="admin">
+
+    <!-- HEADER -->
+    <div class="admin-header">
+        <div>
+            <h1>{{ shop.name }}</h1>
+            <p>Admin Paneli</p>
+        </div>
+
+        <div>
+            <a href="/" class="admin-link">Siteye Git</a>
+            <a href="/admin/logout" class="logout-button">Çıkış Yap</a>
+        </div>
+    </div>
+
+
+    <!-- RANDEVULAR -->
+    <div class="appointments-section">
+        <div class="appointments-title">
+            <h2>Randevular</h2>
+
+            <form method="POST" action="/admin/appointments/delete-all"
+                  onsubmit="return confirm('Tüm randevular silinsin mi?')">
+                <button type="submit" class="delete-all-button">
+                    Tüm Randevuları Sil
+                </button>
+            </form>
+        </div>
+
+        <!-- TABS -->
+        <div class="appointment-tabs">
+            <button class="tab-button active" onclick="showTab('upcoming', this)">
+                Yaklaşan
+                <span class="appointment-count">{{ upcoming_appointments|length }}</span>
+            </button>
+
+            <button class="tab-button" onclick="showTab('past', this)">
+                Geçmiş
+                <span class="appointment-count">{{ past_appointments|length }}</span>
+            </button>
+        </div>
+
+        <!-- YAKLAŞAN -->
+        <div id="upcoming" class="appointment-tab-content">
+            <div class="table-actions">
+                <form method="POST" action="/admin/appointments/delete-upcoming"
+                      onsubmit="return confirm('Yaklaşan tüm randevular silinsin mi?')">
+                    <button type="submit" class="delete-section-button">
+                        Yaklaşanları Sil
+                    </button>
+                </form>
+            </div>
+
+            {% if upcoming_appointments %}
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Telefon</th>
+                        <th>Hizmet</th>
+                        <th>Usta</th>
+                        <th>Tarih</th>
+                        <th>Saat</th>
+                        <th>İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for appointment in upcoming_appointments %}
+                    <tr>
+                        <td>{{ appointment.name }}</td>
+                        <td>{{ appointment.phone }}</td>
+                        <td>{{ appointment.service }}</td>
+                        <td>{{ appointment.barber_name or "—" }}</td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>
+                            <form method="POST"
+                                  action="/admin/appointment/delete/{{ appointment.id }}"
+                                  onsubmit="return confirm('Bu randevu silinsin mi?')">
+                                <button type="submit" class="delete-button">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="no-appointments">
+                Yaklaşan randevu bulunmuyor.
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- GEÇMİŞ -->
+        <div id="past" class="appointment-tab-content" style="display:none;">
+            <div class="table-actions">
+                <form method="POST" action="/admin/appointments/delete-past"
+                      onsubmit="return confirm('Geçmiş tüm randevular silinsin mi?')">
+                    <button type="submit" class="delete-section-button">
+                        Geçmişleri Sil
+                    </button>
+                </form>
+            </div>
+
+            {% if past_appointments %}
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Telefon</th>
+                        <th>Hizmet</th>
+                        <th>Usta</th>
+                        <th>Tarih</th>
+                        <th>Saat</th>
+                        <th>İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for appointment in past_appointments %}
+                    <tr>
+                        <td>{{ appointment.name }}</td>
+                        <td>{{ appointment.phone }}</td>
+                        <td>{{ appointment.service }}</td>
+                        <td>{{ appointment.barber_name or "—" }}</td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>
+                            <form method="POST"
+                                  action="/admin/appointment/delete/{{ appointment.id }}"
+                                  onsubmit="return confirm('Bu randevu silinsin mi?')">
+                                <button type="submit" class="delete-button">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="no-appointments">
+                Geçmiş randevu bulunmuyor.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <!-- ========== GALERİ RESİMLERİ (4 ADET) ========== -->
+    <div class="services-admin">
+        <h2>Galeri Resimleri</h2>
+        <p style="color:#555; margin-bottom: 25px;">
+            Sadece <strong>.jpg</strong> dosyaları yükleyebilirsiniz.
+        </p>
+
+        <div class="gallery-admin">
+
+            <!-- Resim 1 -->
+            <div class="gallery-upload-card">
+                <h3>Resim 1</h3>
+                <div class="gallery-preview">
+                    <img src="{{ url_for('static', filename='images/1.jpg') }}"
+                         alt="Resim 1"
+                         onerror="this.style.display='none'">
+                </div>
+                <form method="POST"
+                      action="/admin/gallery/upload/1"
+                      enctype="multipart/form-data">
+                    <input type="file"
+                           name="image"
+                           accept=".jpg,.jpeg"
+                           required>
+                    <button type="submit" class="upload-button">
+                        Resim 1 Yükle
+                    </button>
+                </form>
+            </div>
+
+            <!-- Resim 2 -->
+            <div class="gallery-upload-card">
+                <h3>Resim 2</h3>
+                <div class="gallery-preview">
+                    <img src="{{ url_for('static', filename='images/2.jpg') }}"
+                         alt="Resim 2"
+                         onerror="this.style.display='none'">
+                </div>
+                <form method="POST"
+                      action="/admin/gallery/upload/2"
+                      enctype="multipart/form-data">
+                    <input type="file"
+                           name="image"
+                           accept=".jpg,.jpeg"
+                           required>
+                    <button type="submit" class="upload-button">
+                        Resim 2 Yükle
+                    </button>
+                </form>
+            </div>
+
+            <!-- Resim 3 -->
+            <div class="gallery-upload-card">
+                <h3>Resim 3</h3>
+                <div class="gallery-preview">
+                    <img src="{{ url_for('static', filename='images/3.jpg') }}"
+                         alt="Resim 3"
+                         onerror="this.style.display='none'">
+                </div>
+                <form method="POST"
+                      action="/admin/gallery/upload/3"
+                      enctype="multipart/form-data">
+                    <input type="file"
+                           name="image"
+                           accept=".jpg,.jpeg"
+                           required>
+                    <button type="submit" class="upload-button">
+                        Resim 3 Yükle
+                    </button>
+                </form>
+            </div>
+
+            <!-- Resim 4 -->
+            <div class="gallery-upload-card">
+                <h3>Resim 4</h3>
+                <div class="gallery-preview">
+                    <img src="{{ url_for('static', filename='images/4.jpg') }}"
+                         alt="Resim 4"
+                         onerror="this.style.display='none'">
+                </div>
+                <form method="POST"
+                      action="/admin/gallery/upload/4"
+                      enctype="multipart/form-data">
+                    <input type="file"
+                           name="image"
+                           accept=".jpg,.jpeg"
+                           required>
+                    <button type="submit" class="upload-button">
+                        Resim 4 Yükle
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- USTALAR -->
+    <div class="services-admin">
+        <h2>Ustalar</h2>
+
+        {% for barber in barbers %}
+        <div class="service-row">
+            <div>
+                <strong>{{ barber.name }}</strong>
+                <span>Usta ID: {{ barber.id }}</span>
+            </div>
+
+            <form method="POST"
+                  action="/admin/barber/delete/{{ barber.id }}"
+                  onsubmit="return confirm('Bu usta silinsin mi?')">
+                <button type="submit" class="delete-button">Sil</button>
+            </form>
+        </div>
+        {% endfor %}
+
+        <h3>Yeni Usta Ekle</h3>
+
+        <form method="POST" action="/admin/barber/add" class="add-service">
+            <input type="text" name="name" placeholder="Usta adı" required>
+            <button type="submit">Usta Ekle</button>
+        </form>
+    </div>
+
+
+    <!-- HİZMETLER -->
+<div class="services-admin">
+    <h2>Hizmetler</h2>
+
+    {% for service in services %}
+    <div class="service-row">
+        <div>
+            <strong>{{ service.name }}</strong>
+            <span>
+                {{ service.duration }} dk
+                {% if service.price is not none and service.price > 0 %}
+                    • {{ "%.0f"|format(service.price) }} ₺
+                {% else %}
+                    • Ücretsiz
+                {% endif %}
+            </span>
+        </div>
+
+        <!-- Süre ve Fiyat Güncelleme -->
+        <form method="POST"
+              action="/admin/service/update"
+              class="service-edit-form">
+
+            <input type="hidden" name="id" value="{{ service.id }}">
+
+            <input type="number"
+                   name="duration"
+                   value="{{ service.duration }}"
+                   min="1"
+                   placeholder="Dakika"
+                   required
+                   title="Süre (dakika)">
+
+            <input type="number"
+                   name="price"
+                   value="{{ service.price if service.price is not none else 0 }}"
+                   min="0"
+                   step="0.01"
+                   placeholder="Fiyat ₺"
+                   title="Fiyat (₺)">
+
+            <button type="submit" class="small-button">
+                Güncelle
+            </button>
+        </form>
+
+        <!-- Silme -->
+        <form method="POST"
+              action="/admin/service/delete/{{ service.id }}"
+              onsubmit="return confirm('Bu hizmet silinsin mi?')">
+            <button type="submit" class="delete-button">
+                Sil
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+
+
+    <h3>Yeni Hizmet Ekle</h3>
+
+    <form method="POST"
+          action="/admin/service/add"
+          class="add-service">
+
+        <input type="text"
+               name="name"
+               placeholder="Hizmet adı"
+               required>
+
+        <input type="number"
+               name="duration"
+               placeholder="Dakika"
+               min="1"
+               required>
+
+        <input type="number"
+               name="price"
+               placeholder="Fiyat ₺"
+               min="0"
+               step="0.01"
+               value="0">
+
+        <button type="submit">
+            Ekle
+        </button>
+    </form>
+</div>
+
+</div>
+
+
+<script>
+function showTab(tabName, button) {
+    document.querySelectorAll(".appointment-tab-content").forEach(tab => {
+        tab.style.display = "none";
+    });
+
+    document.querySelectorAll(".tab-button").forEach(tabButton => {
+        tabButton.classList.remove("active");
+    });
+
+    document.getElementById(tabName).style.display = "block";
+    button.classList.add("active");
+}
+</script>
+
+</body>
+</html>

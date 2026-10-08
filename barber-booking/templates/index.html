@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ shop.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="site-container">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header class="site-header">
+
+        <div class="brand">
+            {% if shop.logo %}
+            <img
+                src="{{ url_for('static', filename=shop.logo) }}"
+                class="header-logo"
+                alt="{{ shop.name }}"
+            >
+            {% endif %}
+
+            <div>
+                <h1>{{ shop.name }}</h1>
+                <p>Profesyonel erkek kuaförü</p>
+            </div>
+        </div>
+
+        <!-- SEKME MENÜSÜ -->
+        <nav class="main-nav">
+            <button class="nav-button active" onclick="showTab('booking', this)">
+                RANDEVU AL
+            </button>
+            <button class="nav-button" onclick="showTab('about', this)">
+                DÜKKAN & HAKKIMIZDA
+            </button>
+        </nav>
+
+    </header>
+
+    <!-- =====================================================
+         RANDEVU AL
+    ====================================================== -->
+    <section id="booking" class="page-tab active-tab">
+        <div class="content-card">
+
+            <h2>Randevu Al</h2>
+            <p class="section-description">
+                Size uygun hizmeti, ustayı ve saati seçerek kolayca randevunuzu oluşturabilirsiniz.
+            </p>
+
+            <form action="{{ url_for('book') }}" method="POST" id="bookingForm">
+
+                <label for="name">Ad Soyad</label>
+                <input type="text" id="name" name="name" placeholder="Adınız ve soyadınız" required>
+
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" name="phone" placeholder="05XX XXX XX XX" required>
+
+                <!-- HİZMET -->
+                <label for="service">
+                    Hizmet
+                </label>
+
+                <select id="service" name="service" required>
+                    <option value="">
+                        Hizmet seçiniz
+                    </option>
+
+                    {% for service in services %}
+                    <option value="{{ service.id }}">
+                        {{ service.name }}
+                        ({{ service.duration }} dk
+                        {% if service.price and service.price > 0 %}
+                            – {{ "%.0f"|format(service.price) }} ₺
+                        {% else %}
+                            – Ücretsiz
+                        {% endif %})
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <label for="barber">Usta</label>
+                <select id="barber" name="barber" required>
+                    <option value="">Önce usta seçiniz</option>
+                    {% for barber in barbers %}
+                    <option value="{{ barber.id }}">{{ barber.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="date">Tarih</label>
+                <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    value="{{ selected_date }}"
+                    min="{{ selected_date }}"
+                    required
+                >
+
+                <label>Müsait Saatler</label>
+                <div id="hours" class="hours">
+                    {% for hour in available_hours %}
+                    <button
+                        type="button"
+                        class="hour {% if hour.available %}available{% else %}booked{% endif %}"
+                        {% if not hour.available %}disabled{% endif %}
+                        data-time="{{ hour.time }}"
+                    >
+                        {{ hour.time }}
+                    </button>
+                    {% endfor %}
+                </div>
+
+                <input type="hidden" name="time" id="selectedTime" required>
+
+                <button type="submit" class="submit-button">
+                    RANDEVU AL
+                </button>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         DÜKKAN & HAKKIMIZDA
+    ====================================================== -->
+    <section id="about" class="page-tab">
+        <div class="content-card about-card">
+
+            {% if shop.logo %}
+            <div class="about-logo-container">
+                <img
+                    src="{{ url_for('static', filename=shop.logo) }}"
+                    class="about-logo"
+                    alt="{{ shop.name }}"
+                >
+            </div>
+            {% endif %}
+
+            <h2>{{ shop.name }}</h2>
+
+            <div class="about-text">
+                <h3>Hakkımızda</h3>
+                <p>{{ shop.description }}</p>
+            </div>
+
+            <!-- ========== GALERİ ========== -->
+            <div class="gallery">
+                <!-- static/images/ klasöründeki resimleri buraya ekleyin -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Salon Görseli 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="Salon Görseli 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Salon Görseli 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/4.jpg') }}" alt="Salon Görseli 4">
+                </div>
+                <!-- Daha fazla resim eklemek isterseniz aynı şekilde kopyalayın -->
+            </div>
+
+            <div class="shop-info">
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <strong>Adres</strong>
+                        <p>{{ shop.address }}</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <strong>Telefon</strong>
+                        <p>{{ shop.phone }}</p>
+                    </div>
+                </div>
+
+                {% if shop.instagram %}
+                <div class="info-item">
+                    <span class="info-icon">📷</span>
+                    <div>
+                        <strong>Instagram</strong>
+                        <p>{{ shop.instagram }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <button
+                class="about-book-button"
+                onclick="showTab('booking', document.querySelector('.nav-button'))"
+            >
+                RANDEVU AL
+            </button>
+
+        </div>
+    </section>
+
+</div>
+
+<a href="/admin" class="admin-button">Admin Paneli</a>
+
+<script>
+/* =====================================================
+   SEKME DEĞİŞTİRME
+===================================================== */
+function showTab(tabId, button) {
+    const tabs = document.querySelectorAll(".page-tab");
+    tabs.forEach(function(tab) {
+        tab.classList.remove("active-tab");
+    });
+
+    const buttons = document.querySelectorAll(".nav-button");
+    buttons.forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    document.getElementById(tabId).classList.add("active-tab");
+
+    if (button) {
+        button.classList.add("active");
+    }
+}
+
+/* =====================================================
+   TARİH DEĞİŞTİĞİNDE SAATLER
+===================================================== */
+const dateInput = document.getElementById("date");
+const serviceInput = document.getElementById("service");
+const barberInput = document.getElementById("barber");
+const hoursContainer = document.getElementById("hours");
+const selectedTime = document.getElementById("selectedTime");
+
+function loadHours() {
+    const date = dateInput.value;
+    const service = serviceInput.value;
+    const barber = barberInput.value;
+
+    if (!date || !service || !barber) {
+        hoursContainer.innerHTML = '<div class="hours-message">Hizmet, usta ve tarih seçiniz.</div>';
+        selectedTime.value = "";
+        return;
+    }
+
+    fetch(`/available-hours?date=${date}&service=${service}&barber=${barber}`)
+        .then(response => response.json())
+        .then(data => {
+            hoursContainer.innerHTML = "";
+            selectedTime.value = "";
+
+            data.hours.forEach(function(hour) {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.textContent = hour.time;
+                button.dataset.time = hour.time;
+                button.classList.add("hour");
+
+                if (hour.available) {
+                    button.classList.add("available");
+                    button.addEventListener("click", function() {
+                        document.querySelectorAll(".hour").forEach(function(h) {
+                            h.classList.remove("selected");
+                        });
+                        button.classList.add("selected");
+                        selectedTime.value = hour.time;
+                    });
+                } else {
+                    button.classList.add("booked");
+                    button.disabled = true;
+                }
+
+                hoursContainer.appendChild(button);
+            });
+        });
+}
+
+dateInput.addEventListener("change", loadHours);
+serviceInput.addEventListener("change", loadHours);
+barberInput.addEventListener("change", loadHours);
+
+/* =====================================================
+   FORM KONTROLÜ
+===================================================== */
+document.getElementById("bookingForm").addEventListener("submit", function(event) {
+    if (!selectedTime.value) {
+        event.preventDefault();
+        alert("Lütfen müsait bir saat seçiniz.");
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Randevu Alındı - {{ shop.name }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="success-page">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <h1>
+            Randevu Alındı
+        </h1>
+
+
+        <p class="success-message">
+
+            Randevunuz başarıyla oluşturuldu.
+
+        </p>
+
+
+        <div class="success-info">
+
+            <div class="success-row">
+
+                <span>Ad Soyad</span>
+
+                <strong>{{ name }}</strong>
+
+            </div>
+
+
+            <div class="success-row">
+
+                <span>Hizmet</span>
+
+                <strong>{{ service }}</strong>
+
+            </div>
+
+
+            {% if barber_name %}
+
+            <div class="success-row">
+
+                <span>Usta</span>
+
+                <strong>{{ barber_name }}</strong>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="success-row">
+
+                <span>Tarih</span>
+
+                <strong>{{ date }}</strong>
+
+            </div>
+
+
+            <div class="success-row">
+
+                <span>Saat</span>
+
+                <strong>{{ time }}</strong>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('index') }}"
+            class="success-home-button"
+        >
+            Ana Sayfaya Dön
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

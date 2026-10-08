@@ -1,0 +1,1403 @@
+/* =========================================================
+   GENEL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #292b33;
+    color: #f2f2f2;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   ANA CONTAINER
+========================================================= */
+
+.site-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 25px 20px 50px;
+}
+
+.container {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+    background: #202229;
+    border: 1px solid #444750;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 22px 25px;
+}
+
+.header-logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background: white;
+    border-radius: 8px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.brand p {
+    margin: 5px 0 0;
+    color: #aeb1ba;
+    font-size: 14px;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.main-nav {
+    display: flex;
+    border-top: 1px solid #444750;
+}
+
+.nav-button {
+    flex: 1;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: #202229;
+    color: #bfc1c8;
+    padding: 17px 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background: #292c35;
+}
+
+.nav-button.active {
+    background: #f1f1f1;
+    color: #202229;
+}
+
+/* =========================================================
+   TAB
+========================================================= */
+
+.page-tab {
+    display: none;
+}
+
+.page-tab.active-tab {
+    display: block;
+}
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
+.content-card {
+    background: #202229;
+    border: 1px solid #444750;
+    border-radius: 12px;
+    padding: 35px;
+}
+
+.content-card h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 28px;
+}
+
+.section-description {
+    text-align: center;
+    color: #aeb1ba;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1px solid #555963;
+    background: #292c35;
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+
+input:focus,
+select:focus {
+    border-color: #aaa;
+}
+
+option {
+    background: #292c35;
+    color: white;
+}
+
+/* =========================================================
+   SAATLER
+========================================================= */
+
+.hours {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.hour {
+    min-height: 46px;
+    margin: 0;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #555963;
+    background: #292c35;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hour.available:hover {
+    background: #3a3d47;
+}
+
+.hour.available {
+    border-color: #777b86;
+}
+
+.hour.selected {
+    background: white;
+    color: #202229;
+    border-color: white;
+}
+
+.hour.booked {
+    background: #191a1f;
+    color: #666a73;
+    border-color: #33353c;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.hours-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #999da7;
+    padding: 20px;
+}
+
+/* =========================================================
+   RANDEVU BUTONU
+========================================================= */
+
+.submit-button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 30px;
+    border: 0;
+    border-radius: 7px;
+    background: white;
+    color: #202229;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #dddddd;
+}
+
+/* =========================================================
+   HAKKIMIZDA
+========================================================= */
+
+.about-card {
+    text-align: center;
+}
+
+.about-logo-container {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 25px;
+    padding: 10px;
+    background: white;
+    border-radius: 12px;
+}
+
+.about-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.about-text {
+    max-width: 700px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.about-text h3 {
+    margin-bottom: 10px;
+}
+
+.about-text p {
+    color: #c4c6cc;
+    line-height: 1.7;
+}
+
+/* Galeri */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    margin: 35px auto 20px;
+    max-width: 750px;
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1a1c22;
+    border: 1px solid #444750;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.shop-info {
+    max-width: 700px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #3d4048;
+}
+
+.info-icon {
+    font-size: 22px;
+}
+
+.info-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    margin: 0;
+    color: #bfc1c8;
+}
+
+.about-book-button {
+    width: auto;
+    min-width: 220px;
+    margin: 25px auto 0;
+    background: white;
+    color: #202229;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.about-book-button:hover {
+    background: #dddddd;
+}
+
+/* =========================================================
+   SUCCESS SAYFASI
+========================================================= */
+
+.success-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.success-card {
+    width: 100%;
+    max-width: 500px;
+    background: #202229;
+    border: 1px solid #444750;
+    border-radius: 14px;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e9f7ef;
+    color: #21874b;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.success-card h1 {
+    margin: 0;
+    color: white;
+    font-size: 28px;
+}
+
+.success-message {
+    color: #bfc1c8;
+    line-height: 1.6;
+    margin: 12px 0 25px;
+}
+
+.success-info {
+    width: 100%;
+    background: #292c35;
+    border: 1px solid #41444d;
+    border-radius: 9px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.success-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #41444d;
+}
+
+.success-row:last-child {
+    border-bottom: 0;
+}
+
+.success-row span {
+    color: #999da7;
+}
+
+.success-row strong {
+    color: white;
+    text-align: right;
+}
+
+.success-home-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 25px;
+    padding: 12px 20px;
+    background: white;
+    color: #202229;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.success-home-button:hover {
+    background: #ddd;
+}
+
+/* =========================================================
+   ADMIN BUTONU
+========================================================= */
+
+.admin-button {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    margin: 25px auto;
+    padding: 12px 20px;
+    background: #555;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.admin-button:hover {
+    background: #333;
+}
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #292b33;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    color: #111;
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #111;
+}
+
+.login-card label {
+    margin-top: 15px;
+    color: #111;
+    font-weight: bold;
+}
+
+.login-card input {
+    margin-top: 7px;
+    margin-bottom: 5px;
+    background: #f8f8f8;
+    color: #111;
+    border: 1px solid #ccc;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 16px;
+    outline: none;
+}
+
+.login-card input:focus {
+    border-color: #111;
+    background: #fff;
+}
+
+/* GİRİŞ YAP BUTONU */
+.login-card button,
+.login-card .login-button,
+.login-card input[type="submit"] {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 25px;
+    padding: 14px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.login-card button:hover,
+.login-card .login-button:hover,
+.login-card input[type="submit"]:hover {
+    background: #333;
+}
+
+.login-error {
+    background: #ffe0e0;
+    color: #b00000;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.login-back {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #111;
+    text-decoration: none;
+}
+
+.login-back:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+.admin {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 40px auto;
+    color: #111;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    word-break: break-word;
+    color: white;
+}
+
+.admin-header p {
+    margin-bottom: 0;
+    color: #ddd;
+}
+
+.admin-header > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.admin-link,
+.logout-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.admin-link {
+    background: white;
+    color: #111;
+}
+
+.admin-link:hover {
+    background: #f0f0f0;
+}
+
+.logout-button {
+    background: #b00000;
+    color: white;
+}
+
+.logout-button:hover {
+    background: #d00000;
+}
+
+/* =========================================================
+   RANDEVU BÖLÜMÜ
+========================================================= */
+
+.appointments-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #111;
+}
+
+.appointments-section h2 {
+    margin-top: 0;
+    color: #111;
+}
+
+.appointments-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.appointment-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.tab-button {
+    width: auto;
+    min-height: 44px;
+    margin: 0;
+    padding: 12px 20px;
+    background: #eee;
+    color: #222;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.tab-button:hover {
+    background: #ddd;
+}
+
+.tab-button.active {
+    background: #111;
+    color: white;
+}
+
+.appointment-count {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px 7px;
+    background: #777;
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.tab-button.active .appointment-count {
+    background: white;
+    color: #111;
+}
+
+/* =========================================================
+   TABLO
+========================================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    min-width: 700px;
+    color: #111;
+}
+
+th,
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    white-space: nowrap;
+    color: #111;
+}
+
+th {
+    background: #111;
+    color: white;
+}
+
+tr:hover {
+    background: #f5f5f5;
+}
+
+td form {
+    margin: 0;
+}
+
+.delete-button {
+    display: inline-block;
+    width: auto;
+    min-height: 40px;
+    background: #b00000;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #d00000;
+}
+
+.delete-all-button {
+    width: auto;
+    min-height: 42px;
+    margin: 0;
+    padding: 10px 15px;
+    background: #8b0000;
+    color: white;
+    white-space: nowrap;
+}
+
+.delete-all-button:hover {
+    background: #b00000;
+}
+
+.delete-section-button {
+    width: auto;
+    min-height: 42px;
+    margin: 0;
+    padding: 10px 15px;
+    background: #8b0000;
+    color: white;
+}
+
+.delete-section-button:hover {
+    background: #b00000;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.no-appointments {
+    background: #f5f5f5;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    color: #444;
+}
+
+/* =========================================================
+   HİZMETLER
+========================================================= */
+
+.services-admin {
+    background: white;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    color: #111;
+}
+
+.services-admin h2 {
+    margin-top: 0;
+    color: #111;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.service-row > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.service-row strong {
+    display: block;
+    word-break: break-word;
+    color: #111;
+}
+
+.service-row span {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.service-row form {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+}
+
+.service-row input {
+    width: 120px;
+    margin: 0;
+    background: #f8f8f8;
+    color: #111;
+    border: 1px solid #ccc;
+}
+
+.small-button {
+    width: auto;
+    min-height: 42px;
+    margin: 0;
+    padding: 10px 15px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.small-button:hover {
+    background: #333;
+}
+
+/* YENİ HİZMET EKLE FORMU */
+.add-service {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 10px;
+    margin-top: 25px;
+    align-items: center;
+}
+
+.add-service input {
+    margin: 0;
+    background: #f8f8f8;
+    color: #111;
+    border: 1px solid #ccc;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.add-service input:focus {
+    border-color: #111;
+    background: #fff;
+}
+
+/* YENİ HİZMET EKLE BUTONU */
+.add-service button,
+.add-service .add-service-button,
+.add-service input[type="submit"] {
+    width: auto;
+    min-width: 140px;
+    min-height: 48px;
+    margin: 0;
+    padding: 12px 20px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.add-service button:hover,
+.add-service .add-service-button:hover,
+.add-service input[type="submit"]:hover {
+    background: #333;
+}
+
+.back-button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #111;
+}
+
+/* =========================================================
+   MOBİL
+========================================================= */
+
+@media (max-width: 700px) {
+    .site-container {
+        padding: 10px 10px 30px;
+    }
+
+    .brand {
+        padding: 18px 15px;
+    }
+
+    .header-logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .brand h1 {
+        font-size: 20px;
+    }
+
+    .brand p {
+        font-size: 12px;
+    }
+
+    .nav-button {
+        font-size: 13px;
+        padding: 15px 8px;
+    }
+
+    .content-card {
+        padding: 25px 15px;
+    }
+
+    .content-card h2 {
+        font-size: 24px;
+    }
+
+    .hours {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+    }
+
+    .hour {
+        font-size: 14px;
+        padding: 8px 4px;
+    }
+
+    .about-logo-container {
+        width: 140px;
+        height: 140px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .success-page {
+        padding: 15px;
+    }
+
+    .success-card {
+        padding: 30px 18px;
+    }
+
+    .success-card h1 {
+        font-size: 24px;
+    }
+
+    .success-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .success-row strong {
+        text-align: left;
+    }
+
+    .login-card {
+        padding: 25px 20px;
+    }
+
+    .login-card button,
+    .login-card .login-button,
+    .login-card input[type="submit"] {
+        min-height: 48px;
+    }
+
+    /* Admin mobil */
+    .add-service {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .add-service input {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .add-service button,
+    .add-service .add-service-button,
+    .add-service input[type="submit"] {
+        width: 100%;
+        min-height: 50px;
+        min-width: unset;
+    }
+
+    .service-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .service-row form {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+
+    .service-row input {
+        width: 100%;
+        flex: 1;
+    }
+
+    .small-button {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 400px) {
+    .hours {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand h1 {
+        font-size: 18px;
+    }
+
+    .content-card {
+        padding: 20px 12px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/* =========================================================
+   GALERİ YÖNETİMİ (ADMIN)
+========================================================= */
+
+.gallery-admin {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.gallery-upload-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+}
+
+.gallery-upload-card h3 {
+    margin: 0 0 12px 0;
+    color: #111;
+    font-size: 16px;
+}
+
+.gallery-preview {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-upload-card input[type="file"] {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+.upload-button {
+    width: 100%;
+    min-height: 42px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.upload-button:hover {
+    background: #333;
+}
+
+@media (max-width: 700px) {
+    .gallery-admin {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-admin {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   HİZMET DÜZENLEME FORMU
+========================================================= */
+
+.service-edit-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+}
+
+.service-edit-form input {
+    width: 90px;
+    min-height: 40px;
+    margin: 0;
+    padding: 8px 10px;
+    background: #f8f8f8;
+    color: #111;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.service-edit-form input:focus {
+    border-color: #111;
+    outline: none;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.service-row > div {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 700px) {
+    .service-edit-form {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .service-edit-form input {
+        width: 100%;
+    }
+
+    .service-edit-form .small-button {
+        width: 100%;
+    }
+}
+/* Fiyat ve süre inputları için daha net görünüm */
+.service-edit-form input[type="number"] {
+    width: 100px;
+    min-height: 40px;
+    background: #f8f8f8;
+    color: #111;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 8px 10px;
+}
+
+.service-edit-form input[type="number"]::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+.add-service input[type="number"]::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+/* =========================================================
+   ERROR PAGE
+========================================================= */
+
+.error-page {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #292b33;
+}
+
+.error-card {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 45px 35px;
+    background: #202229;
+    border: 1px solid #444750;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.error-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 22px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #3a1c1c;
+    color: #ff6b6b;
+    border-radius: 50%;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.error-card h1 {
+    margin: 0 0 15px 0;
+    color: #ffffff;
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+.error-card p {
+    margin: 0 auto 28px auto;
+    color: #bfc1c8;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 380px;
+}
+
+.error-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 240px;
+    height: 48px;
+    margin: 0 auto;
+    background: white;
+    color: #202229;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.error-button:hover {
+    background: #dddddd;
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+    .error-page {
+        padding: 15px;
+    }
+
+    .error-card {
+        padding: 35px 22px;
+        border-radius: 14px;
+    }
+
+    .error-icon {
+        width: 62px;
+        height: 62px;
+        font-size: 30px;
+        margin-bottom: 18px;
+    }
+
+    .error-card h1 {
+        font-size: 22px;
+    }
+
+    .error-card p {
+        font-size: 15px;
+    }
+
+    .error-button {
+        max-width: 100%;
+    }
+}
