@@ -1,4 +1,5 @@
 # 💈 Elit Barber — Online Randevu Sistemi
+Örnek site: https://aposanto.pythonanywhere.com/
 
 > Modern, hızlı ve mobil uyumlu bir **erkek kuaförü / berber randevu yönetim sistemi**.
 
@@ -239,6 +240,9 @@ Bu kurallar, işletmenin randevu trafiğini daha düzenli yönetmesine yardımc�
 ---
 
 ## 🎨 Admin Paneli
+
+kullanıcı: admin
+şifre. 1234
 
 Admin paneli işletme sahibinin günlük operasyonlarını yönetebilmesi için tasarlanmıştır.
 
